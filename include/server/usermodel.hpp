@@ -9,7 +9,6 @@ class UserModel
 public:
     // User 表的增加方法
     bool insert(User &user);
-    
 };
 
 #endif
