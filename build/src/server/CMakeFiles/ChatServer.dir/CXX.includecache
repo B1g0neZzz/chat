@@ -27,11 +27,19 @@ json.hpp
 ../include/server/json.hpp
 usermodel.hpp
 ../include/server/usermodel.hpp
+offlinemessagemodel.hpp
+../include/server/offlinemessagemodel.hpp
 
 ../include/server/db/db.h
 mysql/mysql.h
 -
 string
+-
+
+../include/server/offlinemessagemodel.hpp
+string
+-
+vector
 -
 
 ../include/server/user.hpp
@@ -405,6 +413,14 @@ iostream
 -
 chatserver.hpp
 /home/taiichi/chat/src/server/chatserver.hpp
+
+/home/taiichi/chat/src/server/offlinemessagemodel.cpp
+offlinemessagemodel.hpp
+/home/taiichi/chat/src/server/offlinemessagemodel.hpp
+string
+-
+db.h
+/home/taiichi/chat/src/server/db.h
 
 /home/taiichi/chat/src/server/usermodel.cpp
 usermodel.hpp

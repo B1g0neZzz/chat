@@ -16,6 +16,11 @@
 },
 {
   "directory": "/home/taiichi/chat/build/src/server",
+  "command": "/usr/bin/g++   -I/home/taiichi/chat/include -I/home/taiichi/chat/include/server -I/home/taiichi/chat/include/server/db -I/home/taiichi/chat/thirdpart  -g -g   -o CMakeFiles/ChatServer.dir/offlinemessagemodel.cpp.o -c /home/taiichi/chat/src/server/offlinemessagemodel.cpp",
+  "file": "/home/taiichi/chat/src/server/offlinemessagemodel.cpp"
+},
+{
+  "directory": "/home/taiichi/chat/build/src/server",
   "command": "/usr/bin/g++   -I/home/taiichi/chat/include -I/home/taiichi/chat/include/server -I/home/taiichi/chat/include/server/db -I/home/taiichi/chat/thirdpart  -g -g   -o CMakeFiles/ChatServer.dir/usermodel.cpp.o -c /home/taiichi/chat/src/server/usermodel.cpp",
   "file": "/home/taiichi/chat/src/server/usermodel.cpp"
 },

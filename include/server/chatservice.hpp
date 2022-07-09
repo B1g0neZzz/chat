@@ -12,6 +12,7 @@ using namespace muduo::net;
 
 #include "json.hpp"
 #include "usermodel.hpp"
+#include "offlinemessagemodel.hpp"
 using json = nlohmann::json;
 
 using MsgHandler = std::function<void(const TcpConnectionPtr &conn, json &js, Timestamp time)>;
@@ -46,6 +47,8 @@ class ChatService {
 
     // 数据操作类对象
     UserModel _userModel;
+
+    OfflineMsgModel _offlineMsgModel;
 };
 
 #endif

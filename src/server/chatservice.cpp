@@ -5,6 +5,7 @@
 #include <string>
 
 #include "public.hpp"
+using namespace std;
 using namespace muduo;
 
 ChatService *ChatService::instance() {
@@ -63,6 +64,14 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js,
             response["errno"] = 0;
             response["id"] = user.getId();
             response["name"] = user.getName();
+            // 查询该用户是否有离线信息
+            vector<string> vec = _offlineMsgModel.query(id);
+            if (!vec.empty()) {
+                response["offlinemsg"] = vec;
+                // 读取该用户的离线消息后，把该用户的所有离线消息删除掉
+                _offlineMsgModel.remove(id);
+            }
+
             conn->send(response.dump());
         }
     } else {
@@ -126,7 +135,6 @@ void ChatService::clientCloseException(const TcpConnectionPtr &conn) {
 void ChatService::oneChat(const TcpConnectionPtr &conn, json &js, Timestamp time) {
     int toid = js["to"].get<int>();
 
-
     {
         lock_guard<mutex> lock(_connMutex);
         auto it = _userConnMap.find(toid);
@@ -138,5 +146,5 @@ void ChatService::oneChat(const TcpConnectionPtr &conn, json &js, Timestamp time
     }
 
     // toid 不在线, 存储离线消息
-
+    _offlineMsgModel.insert(toid, js.dump());
 }
