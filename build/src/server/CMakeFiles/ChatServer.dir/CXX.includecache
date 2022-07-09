@@ -413,6 +413,12 @@ iostream
 -
 chatserver.hpp
 /home/taiichi/chat/src/server/chatserver.hpp
+chatservice.hpp
+/home/taiichi/chat/src/server/chatservice.hpp
+iostream
+-
+signal.h
+-
 
 /home/taiichi/chat/src/server/offlinemessagemodel.cpp
 offlinemessagemodel.hpp
