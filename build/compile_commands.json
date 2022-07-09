@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/taiichi/chat/build/src/server",
+  "command": "/usr/bin/g++   -I/home/taiichi/chat/include -I/home/taiichi/chat/include/server -I/home/taiichi/chat/include/server/db -I/home/taiichi/chat/thirdpart  -g -g   -o CMakeFiles/ChatServer.dir/chatserver.cpp.o -c /home/taiichi/chat/src/server/chatserver.cpp",
+  "file": "/home/taiichi/chat/src/server/chatserver.cpp"
+},
+{
+  "directory": "/home/taiichi/chat/build/src/server",
+  "command": "/usr/bin/g++   -I/home/taiichi/chat/include -I/home/taiichi/chat/include/server -I/home/taiichi/chat/include/server/db -I/home/taiichi/chat/thirdpart  -g -g   -o CMakeFiles/ChatServer.dir/chatservice.cpp.o -c /home/taiichi/chat/src/server/chatservice.cpp",
+  "file": "/home/taiichi/chat/src/server/chatservice.cpp"
+},
+{
+  "directory": "/home/taiichi/chat/build/src/server",
+  "command": "/usr/bin/g++   -I/home/taiichi/chat/include -I/home/taiichi/chat/include/server -I/home/taiichi/chat/include/server/db -I/home/taiichi/chat/thirdpart  -g -g   -o CMakeFiles/ChatServer.dir/main.cpp.o -c /home/taiichi/chat/src/server/main.cpp",
+  "file": "/home/taiichi/chat/src/server/main.cpp"
+},
+{
+  "directory": "/home/taiichi/chat/build/src/server",
+  "command": "/usr/bin/g++   -I/home/taiichi/chat/include -I/home/taiichi/chat/include/server -I/home/taiichi/chat/include/server/db -I/home/taiichi/chat/thirdpart  -g -g   -o CMakeFiles/ChatServer.dir/db/db.cpp.o -c /home/taiichi/chat/src/server/db/db.cpp",
+  "file": "/home/taiichi/chat/src/server/db/db.cpp"
+}
+]
