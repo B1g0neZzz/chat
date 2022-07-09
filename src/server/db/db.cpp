@@ -1,4 +1,4 @@
-#include "db.hpp"
+#include "db.h"
 #include <muduo/base/Logging.h>
 
 // 数据库配置信息
@@ -26,6 +26,11 @@ bool MySQL::connect()
     {
         // C 和 C++ 代码默认的编码字符时 ASCII，如果不设置，从 MySQL 上拉下来的中文显示 ?
         mysql_query(_conn, "set names gbk");
+        LOG_INFO << "connect mysql success!";
+    }
+    else
+    {
+        LOG_INFO << "connect mysql fail!";
     }
     return p;
 }
