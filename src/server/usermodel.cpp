@@ -28,7 +28,7 @@ User UserModel::query(int id)
 {
     // 1. 组装 sql 语句
     char sql[1024] = {0};
-    sprintf(sql, "select * from user where id = %d", id);
+    sprintf(sql, "select * from user where id = %d ", id);
 
     MySQL mysql;
     if (mysql.connect())
