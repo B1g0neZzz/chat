@@ -21,14 +21,24 @@ unordered_map
 -
 functional
 -
+usermodel.hpp
+../include/server/usermodel.hpp
 json.hpp
 ../include/server/json.hpp
 
-../include/server/db/db.hpp
+../include/server/db/db.h
 mysql/mysql.h
 -
 string
 -
+
+../include/server/user.hpp
+string
+-
+
+../include/server/usermodel.hpp
+user.hpp
+../include/server/user.hpp
 
 ../thirdpart/json.hpp
 algorithm
@@ -383,14 +393,22 @@ muduo/base/Logging.h
 -
 
 /home/taiichi/chat/src/server/db/db.cpp
-db.hpp
-/home/taiichi/chat/src/server/db/db.hpp
+db.h
+/home/taiichi/chat/src/server/db/db.h
 muduo/base/Logging.h
 -
 
 /home/taiichi/chat/src/server/main.cpp
 chatserver.hpp
 /home/taiichi/chat/src/server/chatserver.hpp
+iostream
+-
+
+/home/taiichi/chat/src/server/usermodel.cpp
+usermodel.hpp
+/home/taiichi/chat/src/server/usermodel.hpp
+db.h
+/home/taiichi/chat/src/server/db.h
 iostream
 -
 
