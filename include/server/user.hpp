@@ -5,58 +5,48 @@
 using namespace std;
 
 // 匹配 User 表的 ORM 类
-class User
-{
-public:
-    User(int id = -1, string name = "", string pwd = "", string state = "offline")
-    {
+class User {
+   public:
+    User(int id = -1, string name = "", string pwd = "", string state = "offline") {
         this->id = id;
         this->name = name;
         this->password = password;
         this->state = state;
     }
 
-    void setId(int id)
-    {
+    void setId(int id) {
         this->id = id;
     }
 
-    void setName(string name)
-    {
+    void setName(string name) {
         this->name = name;
     }
 
-    void setPwd(string pwd)
-    {
+    void setPwd(string pwd) {
         this->password = pwd;
     }
 
-    void setState(string state)
-    {
+    void setState(string state) {
         this->state = state;
     }
 
-    int getId()
-    {
+    int getId() {
         return this->id;
     }
 
-    string getName()
-    {
+    string getName() {
         return this->name;
     }
 
-    string getPwd()
-    {
+    string getPwd() {
         return this->password;
     }
 
-    string getState()
-    {
+    string getState() {
         return this->state;
     }
 
-private:
+   private:
     int id;
     string name;
     string password;

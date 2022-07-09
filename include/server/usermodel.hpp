@@ -4,9 +4,8 @@
 #include "user.hpp"
 
 // User 表的数据操作类
-class UserModel
-{
-public:
+class UserModel {
+   public:
     // User 表的增加方法
     bool insert(User &user);
 

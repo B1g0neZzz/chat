@@ -9,22 +9,24 @@
 ../include/public.hpp
 
 ../include/server/chatserver.hpp
-muduo/net/TcpServer.h
--
 muduo/net/EventLoop.h
+-
+muduo/net/TcpServer.h
 -
 
 ../include/server/chatservice.hpp
 muduo/net/TcpConnection.h
 -
-unordered_map
--
 functional
 -
-usermodel.hpp
-../include/server/usermodel.hpp
+mutex
+-
+unordered_map
+-
 json.hpp
 ../include/server/json.hpp
+usermodel.hpp
+../include/server/usermodel.hpp
 
 ../include/server/db/db.h
 mysql/mysql.h
@@ -373,24 +375,24 @@ type_traits
 /home/taiichi/chat/src/server/chatserver.cpp
 chatserver.hpp
 /home/taiichi/chat/src/server/chatserver.hpp
+functional
+-
+string
+-
 chatservice.hpp
 /home/taiichi/chat/src/server/chatservice.hpp
 json.hpp
 /home/taiichi/chat/src/server/json.hpp
-string
--
-functional
--
 
 /home/taiichi/chat/src/server/chatservice.cpp
 chatservice.hpp
 /home/taiichi/chat/src/server/chatservice.hpp
-public.hpp
-/home/taiichi/chat/src/server/public.hpp
-string
--
 muduo/base/Logging.h
 -
+string
+-
+public.hpp
+/home/taiichi/chat/src/server/public.hpp
 
 /home/taiichi/chat/src/server/db/db.cpp
 db.h
@@ -399,16 +401,16 @@ muduo/base/Logging.h
 -
 
 /home/taiichi/chat/src/server/main.cpp
-chatserver.hpp
-/home/taiichi/chat/src/server/chatserver.hpp
 iostream
 -
+chatserver.hpp
+/home/taiichi/chat/src/server/chatserver.hpp
 
 /home/taiichi/chat/src/server/usermodel.cpp
 usermodel.hpp
 /home/taiichi/chat/src/server/usermodel.hpp
-db.h
-/home/taiichi/chat/src/server/db.h
 iostream
 -
+db.h
+/home/taiichi/chat/src/server/db.h
 

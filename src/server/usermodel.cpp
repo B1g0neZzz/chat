@@ -1,20 +1,20 @@
 #include "usermodel.hpp"
-#include "db.h"
+
 #include <iostream>
+
+#include "db.h"
 using namespace std;
 
-bool UserModel::insert(User &user)
-{
+bool UserModel::insert(User &user) {
     // 1. 组装 sql 语句
     char sql[1024] = {0};
-    sprintf(sql, "insert into user(name, password, state) values('%s', '%s', '%s')",
-            user.getName().c_str(), user.getPwd().c_str(), user.getState().c_str());
+    sprintf(
+        sql, "insert into user(name, password, state) values('%s', '%s', '%s')",
+        user.getName().c_str(), user.getPwd().c_str(), user.getState().c_str());
 
     MySQL mysql;
-    if (mysql.connect())
-    {
-        if (mysql.update(sql))
-        {
+    if (mysql.connect()) {
+        if (mysql.update(sql)) {
             // 获取插入成功的用户数据生成的主键 id
             user.setId(mysql_insert_id(mysql.getConnection()));
             return true;
@@ -24,21 +24,17 @@ bool UserModel::insert(User &user)
 }
 
 // 根据用户号码查询用户信息
-User UserModel::query(int id)
-{
+User UserModel::query(int id) {
     // 1. 组装 sql 语句
     char sql[1024] = {0};
     sprintf(sql, "select * from user where id = %d ", id);
 
     MySQL mysql;
-    if (mysql.connect())
-    {
+    if (mysql.connect()) {
         MYSQL_RES *res = mysql.query(sql);
-        if (res != nullptr)
-        {
+        if (res != nullptr) {
             MYSQL_ROW row = mysql_fetch_row(res);
-            if (row != nullptr)
-            {
+            if (row != nullptr) {
                 User user;
                 user.setId(atoi(row[0]));
                 user.setName(row[1]);
@@ -55,18 +51,15 @@ User UserModel::query(int id)
 }
 
 // 更新用户的状态信息
-bool UserModel::updateState(User &user)
-{
+bool UserModel::updateState(User &user) {
     // 1. 组装 sql 语句
     char sql[1024] = {0};
-    sprintf(sql, "update user set state = '%s' where id = %d", user.getState().c_str(), user.getId());
-
+    sprintf(sql, "update user set state = '%s' where id = %d",
+            user.getState().c_str(), user.getId());
 
     MySQL mysql;
-    if (mysql.connect())
-    {
-        if (mysql.update(sql))
-        {
+    if (mysql.connect()) {
+        if (mysql.update(sql)) {
             return true;
         }
     }
