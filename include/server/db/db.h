@@ -6,8 +6,6 @@
 
 using namespace std;
 
-
-
 // 数据库操作类
 class MySQL
 {
@@ -21,6 +19,8 @@ public:
     bool update(string sql);
     // 查询操作
     MYSQL_RES *query(string sql);
+    // 获取连接
+    MYSQL *getConnection();
 
 private:
     MYSQL *_conn;

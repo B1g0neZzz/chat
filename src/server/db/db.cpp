@@ -46,7 +46,7 @@ bool MySQL::update(string sql)
     return true;
 }
 // 查询操作
-MYSQL_RES* MySQL::query(string sql)
+MYSQL_RES *MySQL::query(string sql)
 {
     if (mysql_query(_conn, sql.c_str()))
     {
@@ -55,4 +55,10 @@ MYSQL_RES* MySQL::query(string sql)
         return nullptr;
     }
     return mysql_use_result(_conn);
+}
+
+// 获取连接
+MYSQL* MySQL::getConnection()
+{
+    return _conn;
 }
