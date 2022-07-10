@@ -19,7 +19,6 @@ ChatService::ChatService() {
     _msgHandlerMap.insert({REG_MSG, std::bind(&ChatService::reg, this, _1, _2, _3)});
     _msgHandlerMap.insert({ONE_CHAT_MSG, std::bind(&ChatService::oneChat, this, _1, _2, _3)});
     _msgHandlerMap.insert({ADD_FRIEND_MSG, std::bind(&ChatService::addFriend, this, _1, _2, _3)});
-
 }
 
 // 服务器异常, 业务重置方法
@@ -55,7 +54,7 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js,
             json response;
             response["msgid"] = LOGIN_MSG_ACK;
             response["errno"] = 2;
-            response["errmsg"] = "该账号已经登录, 请重新输入新账号";
+            response["errmsg"] = "this count is using, input another!";
             conn->send(response.dump());
         } else {
             // 登录成功，记录用户连接信息
@@ -102,7 +101,7 @@ void ChatService::login(const TcpConnectionPtr &conn, json &js,
         json response;
         response["msgid"] = LOGIN_MSG_ACK;
         response["errno"] = 1;
-        response["errmsg"] = "用户名或密码错误";
+        response["errmsg"] = "id or password is invalid";
         conn->send(response.dump());
     }
 }
@@ -179,4 +178,43 @@ void ChatService::addFriend(const TcpConnectionPtr &conn, json &js, Timestamp ti
 
     // 存储好友信息
     _friendModel.insert(userid, friendid);
+}
+
+// 创建群组业务
+void ChatService::createGroup(const TcpConnectionPtr &conn, json &js, Timestamp time) {
+    int userid = js["id"].get<int>();
+    string name = js["groupname"];
+    string desc = js["groupdesc"];
+
+    // 存储新创建的群组信息
+    Group group(-1, name, desc);
+    if (_groupModel.createGroup(group)) {
+        // 存储群组创建人信息
+        _groupModel.addGroup(userid, group.getId(), "creator");
+    }
+}
+
+// 加入群组业务
+void ChatService::addGroup(const TcpConnectionPtr &conn, json &js, Timestamp time) {
+    int userid = js["id"].get<int>();
+    int groupid = js["group"].get<int>();
+    _groupModel.addGroup(userid, groupid, "normal");
+}
+
+// 群组聊天业务
+void ChatService::groupChat(const TcpConnectionPtr &conn, json &js, Timestamp time) {
+    int userid = js["id"].get<int>();
+    int groupid = js["groupid"].get<int>();
+    vector<int> useridVec = _groupModel.queryGroupUsers(userid, groupid);
+    lock_guard<mutex> lock(_connMutex);
+    for (int id : useridVec) {
+        auto it = _userConnMap.find(id);
+        if (it != _userConnMap.find(id)) {
+            // 转发群消息
+            it->second->send(js.dump());
+        } else {
+            // 存储离线群消息
+            _offlineMsgModel.insert(id, js.dump());
+        }
+    }
 }
