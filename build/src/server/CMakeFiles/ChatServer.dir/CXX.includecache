@@ -31,6 +31,8 @@ json.hpp
 ../include/server/json.hpp
 offlinemessagemodel.hpp
 ../include/server/offlinemessagemodel.hpp
+redis.hpp
+../include/server/redis.hpp
 usermodel.hpp
 ../include/server/usermodel.hpp
 
@@ -79,6 +81,14 @@ string
 ../include/server/model/usermodel.hpp
 user.hpp
 ../include/server/model/user.hpp
+
+../include/server/redis/redis.hpp
+hiredis/hiredis.h
+-
+thread
+-
+functional
+-
 
 ../thirdpart/json.hpp
 algorithm
@@ -479,4 +489,10 @@ iostream
 -
 db.h
 /home/taiichi/chat/src/server/model/db.h
+
+/home/taiichi/chat/src/server/redis/redis.cpp
+redis.hpp
+/home/taiichi/chat/src/server/redis/redis.hpp
+iostream
+-
 

@@ -6,5 +6,5 @@ CXX_FLAGS = -g -g
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/taiichi/chat/include -I/home/taiichi/chat/include/server -I/home/taiichi/chat/include/server/model -I/home/taiichi/chat/include/server/db -I/home/taiichi/chat/thirdpart 
+CXX_INCLUDES = -I/home/taiichi/chat/include -I/home/taiichi/chat/include/server -I/home/taiichi/chat/include/server/model -I/home/taiichi/chat/include/server/db -I/home/taiichi/chat/include/server/redis -I/home/taiichi/chat/thirdpart 
 

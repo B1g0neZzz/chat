@@ -6,6 +6,7 @@
 // 存储用户的离线消息
 void OfflineMsgModel::insert(int userid, string msg) {
     char sql[1024] = {0};
+    printf("INNER!!!!");
     sprintf(sql, "insert into offlinemessage values(%d, '%s')", userid, msg.c_str());
 
     MySQL mysql;

@@ -14,6 +14,7 @@ using namespace muduo::net;
 #include "groupmodel.hpp"
 #include "json.hpp"
 #include "offlinemessagemodel.hpp"
+#include "redis.hpp"
 #include "usermodel.hpp"
 using json = nlohmann::json;
 
@@ -26,6 +27,8 @@ class ChatService {
     static ChatService *instance();
     // 处理登录业务
     void login(const TcpConnectionPtr &conn, json &js, Timestamp time);
+    // 注销登录业务
+    void loginout(const TcpConnectionPtr &conn, json &js, Timestamp time);
     // 处理注册业务
     void reg(const TcpConnectionPtr &conn, json &js, Timestamp time);
     // 一对一聊天业务
@@ -38,12 +41,14 @@ class ChatService {
     void reset();
     // 处理客户端异常退出
     void clientCloseException(const TcpConnectionPtr &conn);
-    //创建群组业务
+    // 创建群组业务
     void createGroup(const TcpConnectionPtr &conn, json &js, Timestamp time);
     // 加入群组业务
     void addGroup(const TcpConnectionPtr &conn, json &js, Timestamp time);
     // 群组聊天业务
     void groupChat(const TcpConnectionPtr &conn, json &js, Timestamp time);
+    // 从 redis 消息队列中获取订阅的消息
+    void handleRedisSubscribeMessage(int, string);
 
    private:
     ChatService();
@@ -65,6 +70,9 @@ class ChatService {
     FriendModel _friendModel;
 
     GroupModel _groupModel;
+
+    // redis 操作对象
+    Redis _redis;
 };
 
 #endif

@@ -202,6 +202,7 @@ void doLoginResponse(json &responsejs)
     }
     else // 登录成功
     {
+        cout << responsejs << endl;
         // 记录当前用户的id和name
         g_currentUser.setId(responsejs["id"].get<int>());
         g_currentUser.setName(responsejs["name"]);
