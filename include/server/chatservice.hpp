@@ -13,6 +13,8 @@ using namespace muduo::net;
 #include "json.hpp"
 #include "usermodel.hpp"
 #include "offlinemessagemodel.hpp"
+#include "friendmodel.hpp"
+#include "groupmodel.hpp"
 using json = nlohmann::json;
 
 using MsgHandler = std::function<void(const TcpConnectionPtr &conn, json &js, Timestamp time)>;
@@ -28,6 +30,8 @@ class ChatService {
     void reg(const TcpConnectionPtr &conn, json &js, Timestamp time);
     // 一对一聊天业务
     void oneChat(const TcpConnectionPtr &conn, json &js, Timestamp time);
+    // 添加好友业务
+    void addFriend(const TcpConnectionPtr &conn, json &js, Timestamp time);
     // 获取消息对应的处理器
     MsgHandler getHandler(int msgid);
     // 服务器异常， 业务重置方法
@@ -51,6 +55,10 @@ class ChatService {
     UserModel _userModel;
 
     OfflineMsgModel _offlineMsgModel;
+
+    FriendModel _friendModel;
+
+    GroupModel _groupModel;
 };
 
 #endif
