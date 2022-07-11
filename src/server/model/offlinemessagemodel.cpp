@@ -1,13 +1,15 @@
 #include "offlinemessagemodel.hpp"
 
 #include <string>
+
 #include "db.h"
 
 // 存储用户的离线消息
 void OfflineMsgModel::insert(int userid, string msg) {
     char sql[1024] = {0};
     printf("INNER!!!!");
-    sprintf(sql, "insert into offlinemessage values(%d, '%s')", userid, msg.c_str());
+    sprintf(sql, "insert into offlinemessage values(%d, '%s')", userid,
+            msg.c_str());
 
     MySQL mysql;
     if (mysql.connect()) {
@@ -30,7 +32,8 @@ void OfflineMsgModel::remove(int userid) {
 vector<string> OfflineMsgModel::query(int userid) {
     // 1. 组装 sql 语句
     char sql[1024] = {0};
-    sprintf(sql, "select message from offlinemessage where userid = %d ", userid);
+    sprintf(sql, "select message from offlinemessage where userid = %d ",
+            userid);
 
     vector<string> vec;
     MySQL mysql;
@@ -39,8 +42,7 @@ vector<string> OfflineMsgModel::query(int userid) {
         if (res != nullptr) {
             MYSQL_ROW row;
             // 把 userid 用户的所有离线消息放入 vec 中返回
-            while ((row = mysql_fetch_row(res)) != nullptr)
-            {
+            while ((row = mysql_fetch_row(res)) != nullptr) {
                 vec.push_back(row[0]);
             }
 

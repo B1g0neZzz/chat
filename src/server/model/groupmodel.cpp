@@ -21,8 +21,8 @@ bool GroupModel::createGroup(Group &group) {
 // 加入群组
 void GroupModel::addGroup(int userid, int groupid, string role) {
     char sql[1024] = {0};
-    sprintf(sql, "insert into groupuser values(%d, %d, '%s')",
-            groupid, userid, role.c_str());
+    sprintf(sql, "insert into groupuser values(%d, %d, '%s')", groupid, userid,
+            role.c_str());
 
     MySQL mysql;
     if (mysql.connect()) {
@@ -34,7 +34,8 @@ void GroupModel::addGroup(int userid, int groupid, string role) {
 vector<Group> GroupModel::queryGroups(int userid) {
     /*
     1. 先根据 userid 在 groupuser 表中查询出该用户所属的群组信息
-    2. 在根据群组信息，查询属于该群组的所有用户的 userid, 并且和 user 表进行多表查询， 查出用户的详情信息
+    2. 在根据群组信息，查询属于该群组的所有用户的 userid, 并且和 user
+    表进行多表查询， 查出用户的详情信息
     */
     char sql[1024] = {0};
     sprintf(sql,
@@ -50,8 +51,7 @@ vector<Group> GroupModel::queryGroups(int userid) {
         if (res != nullptr) {
             MYSQL_ROW row;
             // 查出 userid 所有的群组信息
-            while ((row = mysql_fetch_row(res)) != nullptr)
-            {
+            while ((row = mysql_fetch_row(res)) != nullptr) {
                 Group group;
                 group.setId(atoi(row[0]));
                 group.setName(row[1]);
@@ -86,22 +86,21 @@ vector<Group> GroupModel::queryGroups(int userid) {
     return groupVec;
 }
 
-// 根据指定的 groupid 查询群组用户 id 列表，除 userid 自己，主要用户群聊业务给群组其它成员群发消息
-vector<int> GroupModel::queryGroupUsers(int userid, int groupid)
-{
+// 根据指定的 groupid 查询群组用户 id 列表，除 userid
+// 自己，主要用户群聊业务给群组其它成员群发消息
+vector<int> GroupModel::queryGroupUsers(int userid, int groupid) {
     char sql[1024] = {0};
-    sprintf(sql, "select userid from groupuser where groupid = %d and userid != %d", groupid, userid);
+    sprintf(sql,
+            "select userid from groupuser where groupid = %d and userid != %d",
+            groupid, userid);
 
     vector<int> idVec;
     MySQL mysql;
-    if (mysql.connect())
-    {
+    if (mysql.connect()) {
         MYSQL_RES *res = mysql.query(sql);
-        if (res != nullptr)
-        {
+        if (res != nullptr) {
             MYSQL_ROW row;
-            while ((row = mysql_fetch_row(res)) != nullptr)
-            {
+            while ((row = mysql_fetch_row(res)) != nullptr) {
                 idVec.push_back(atoi(row[0]));
             }
             mysql_free_result(res);

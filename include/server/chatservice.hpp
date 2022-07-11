@@ -18,11 +18,12 @@ using namespace muduo::net;
 #include "usermodel.hpp"
 using json = nlohmann::json;
 
-using MsgHandler = std::function<void(const TcpConnectionPtr &conn, json &js, Timestamp time)>;
+using MsgHandler =
+    std::function<void(const TcpConnectionPtr &conn, json &js, Timestamp time)>;
 
 // 聊天服务器业务类
 class ChatService {
-   public:
+public:
     // 获取单例对象的接口函数
     static ChatService *instance();
     // 处理登录业务
@@ -50,7 +51,7 @@ class ChatService {
     // 从 redis 消息队列中获取订阅的消息
     void handleRedisSubscribeMessage(int, string);
 
-   private:
+private:
     ChatService();
 
     // 存储消息 id 和其对应的业务处理方法

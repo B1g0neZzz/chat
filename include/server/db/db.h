@@ -9,7 +9,7 @@ using namespace std;
 
 // 数据库操作类
 class MySQL {
-   public:
+public:
     // 初始化数据库连接
     MySQL();
     ~MySQL();
@@ -22,7 +22,7 @@ class MySQL {
     // 获取连接
     MYSQL *getConnection();
 
-   private:
+private:
     MYSQL *_conn;
 };
 

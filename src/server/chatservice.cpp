@@ -16,20 +16,29 @@ ChatService *ChatService::instance() {
 
 ChatService::ChatService() {
     // 用户基本业务管理相关事件处理回调注册
-    _msgHandlerMap.insert({LOGIN_MSG, std::bind(&ChatService::login, this, _1, _2, _3)});
-    _msgHandlerMap.insert({REG_MSG, std::bind(&ChatService::reg, this, _1, _2, _3)});
-    _msgHandlerMap.insert({ONE_CHAT_MSG, std::bind(&ChatService::oneChat, this, _1, _2, _3)});
-    _msgHandlerMap.insert({ADD_FRIEND_MSG, std::bind(&ChatService::addFriend, this, _1, _2, _3)});
+    _msgHandlerMap.insert(
+        {LOGIN_MSG, std::bind(&ChatService::login, this, _1, _2, _3)});
+    _msgHandlerMap.insert(
+        {REG_MSG, std::bind(&ChatService::reg, this, _1, _2, _3)});
+    _msgHandlerMap.insert(
+        {ONE_CHAT_MSG, std::bind(&ChatService::oneChat, this, _1, _2, _3)});
+    _msgHandlerMap.insert(
+        {ADD_FRIEND_MSG, std::bind(&ChatService::addFriend, this, _1, _2, _3)});
 
     // 群组业务管理相关事件处理回调注册
-    _msgHandlerMap.insert({CREATE_GROUP_MSG, std::bind(&ChatService::createGroup, this, _1, _2, _3)});
-    _msgHandlerMap.insert({ADD_GROUP_MSG, std::bind(&ChatService::addGroup, this, _1, _2, _3)});
-    _msgHandlerMap.insert({GROUP_CHAT_MSG, std::bind(&ChatService::groupChat, this, _1, _2, _3)});
+    _msgHandlerMap.insert(
+        {CREATE_GROUP_MSG,
+         std::bind(&ChatService::createGroup, this, _1, _2, _3)});
+    _msgHandlerMap.insert(
+        {ADD_GROUP_MSG, std::bind(&ChatService::addGroup, this, _1, _2, _3)});
+    _msgHandlerMap.insert(
+        {GROUP_CHAT_MSG, std::bind(&ChatService::groupChat, this, _1, _2, _3)});
 
     // 连接 redis 服务器
     if (_redis.connect()) {
         // 设置上报消息的回调
-        _redis.init_notify_handler(std::bind(&ChatService::handleRedisSubscribeMessage, this, _1, _2));
+        _redis.init_notify_handler(
+            std::bind(&ChatService::handleRedisSubscribeMessage, this, _1, _2));
     }
 }
 
@@ -148,7 +157,8 @@ void ChatService::reg(const TcpConnectionPtr &conn, json &js, Timestamp time) {
 }
 
 // 处理注销业务
-void ChatService::loginout(const TcpConnectionPtr &conn, json &js, Timestamp time) {
+void ChatService::loginout(const TcpConnectionPtr &conn, json &js,
+                           Timestamp time) {
     int userid = js["id"].get<int>();
 
     {
@@ -193,7 +203,8 @@ void ChatService::clientCloseException(const TcpConnectionPtr &conn) {
 }
 
 // 一对一聊天业务
-void ChatService::oneChat(const TcpConnectionPtr &conn, json &js, Timestamp time) {
+void ChatService::oneChat(const TcpConnectionPtr &conn, json &js,
+                          Timestamp time) {
     int toid = js["toid"].get<int>();
 
     {
@@ -209,7 +220,6 @@ void ChatService::oneChat(const TcpConnectionPtr &conn, json &js, Timestamp time
     // 查询 toid 是否在线
     User user = _userModel.query(toid);
     if (user.getState() == "online") {
-
         _redis.publish(toid, js.dump());
         return;
     }
@@ -219,7 +229,8 @@ void ChatService::oneChat(const TcpConnectionPtr &conn, json &js, Timestamp time
 }
 
 // 添加好友业务
-void ChatService::addFriend(const TcpConnectionPtr &conn, json &js, Timestamp time) {
+void ChatService::addFriend(const TcpConnectionPtr &conn, json &js,
+                            Timestamp time) {
     int userid = js["id"].get<int>();
     int friendid = js["friendid"].get<int>();
 
@@ -228,7 +239,8 @@ void ChatService::addFriend(const TcpConnectionPtr &conn, json &js, Timestamp ti
 }
 
 // 创建群组业务
-void ChatService::createGroup(const TcpConnectionPtr &conn, json &js, Timestamp time) {
+void ChatService::createGroup(const TcpConnectionPtr &conn, json &js,
+                              Timestamp time) {
     int userid = js["id"].get<int>();
     string name = js["groupname"];
     string desc = js["groupdesc"];
@@ -242,14 +254,16 @@ void ChatService::createGroup(const TcpConnectionPtr &conn, json &js, Timestamp 
 }
 
 // 加入群组业务
-void ChatService::addGroup(const TcpConnectionPtr &conn, json &js, Timestamp time) {
+void ChatService::addGroup(const TcpConnectionPtr &conn, json &js,
+                           Timestamp time) {
     int userid = js["id"].get<int>();
     int groupid = js["group"].get<int>();
     _groupModel.addGroup(userid, groupid, "normal");
 }
 
 // 群组聊天业务
-void ChatService::groupChat(const TcpConnectionPtr &conn, json &js, Timestamp time) {
+void ChatService::groupChat(const TcpConnectionPtr &conn, json &js,
+                            Timestamp time) {
     int userid = js["id"].get<int>();
     int groupid = js["groupid"].get<int>();
     vector<int> useridVec = _groupModel.queryGroupUsers(userid, groupid);
@@ -274,7 +288,7 @@ void ChatService::groupChat(const TcpConnectionPtr &conn, json &js, Timestamp ti
 
 // 从 redis 消息队列中获取订阅的消息
 void ChatService::handleRedisSubscribeMessage(int userid, string msg) {
-        LOG_ERROR << "online";
+    LOG_ERROR << "online";
     lock_guard<mutex> lock(_connMutex);
     auto it = _userConnMap.find(userid);
     if (it != _userConnMap.end()) {

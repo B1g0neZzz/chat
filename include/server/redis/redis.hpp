@@ -2,12 +2,12 @@
 #define REDIS_H
 
 #include <hiredis/hiredis.h>
-#include <thread>
+
 #include <functional>
+#include <thread>
 using namespace std;
 
-class Redis
-{
+class Redis {
 public:
     Redis();
     ~Redis();
