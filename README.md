@@ -315,6 +315,7 @@ GroupModel group_model_;
 是像下面这样把每个服务器连接起来么？
 
 ![image-20220718114920220](http://taiichi.oss-cn-beijing.aliyuncs.com/img/image-20220718114920220.png)
+
 这样肯定不行，服务器之间关联性太强了，一旦多加一个服务器，以前的服务器都要增加一条指向它的连接。
 
 所以，我们可以借鉴交换机连接PC的思想，引入Redis消息队列中间件！
