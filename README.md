@@ -319,7 +319,7 @@ GroupModel group_model_;
 
 所以，我们可以借鉴交换机连接PC的思想，引入Redis消息队列中间件！
 
-<img src="http://taiichi.oss-cn-beijing.aliyuncs.com/img/image-20220718110247438.png" alt="image-20220718110247438" style="zoom:80%;" />
+<img src="http://taiichi.oss-cn-beijing.aliyuncs.com/img/image-20220718114515447.png" alt="image-20220718114515447" style="zoom:67%;" />
 
 当客户端登录的时候，服务器把它的id号 subscribe到redis中间件，表示该服务器对这个id发生的事件感兴趣，而Redis收到发送给该id的消息时就会 把消息转发到这个服务器上。
 
