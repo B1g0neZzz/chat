@@ -304,7 +304,7 @@ GroupModel group_model_;
 
 当一个新的客户端连接到来时，负载均衡模块便会根据我们在nginx.conf里面设置的参数来分配服务器资源。
 
-![image-20220718110126907](http://taiichi.oss-cn-beijing.aliyuncs.com/img/image-20220718110126907.png)
+![image-20220718114806043](http://taiichi.oss-cn-beijing.aliyuncs.com/img/image-20220718114806043.png)
 
 按图中所示，客户端只用连接我们的负载均衡服务器，然后服务器就会自动把client连接分配到对应的server服务器。
 
